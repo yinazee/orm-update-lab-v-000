@@ -60,7 +60,6 @@ class Student
   end
 
   def update
-    student = Student.find_by_name(name)
     sql = "UPDATE students SET name = ? WHERE name = ?"
     DB[:conn].execute(sql, self.name, self.grade)
   end

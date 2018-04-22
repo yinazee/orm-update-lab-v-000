@@ -45,6 +45,8 @@ class Student
   end
 
   def self.find_by_name(name)
+    # find the student in the database given a name
+    # return a new instance of the Student class
     sql = <<-SQL
       SELECT *
       FROM students
@@ -52,16 +54,35 @@ class Student
       LIMIT 1
     SQL
 
-    DB[:conn].execute(sql, name).map do |row|
+    DB[:conn].execute(sql,name).map do |row|
       self.new_from_db(row)
     end.first
-    # The return value of the .map method is an array,
-    # and we're simply grabbing the .first element from the returned array.
   end
 
   def update
-    sql = "UPDATE students SET name = ?, grade = ? WHERE name = ?"
+    sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
+
+
+  # def self.find_by_name(name)
+  #   sql = <<-SQL
+  #     SELECT *
+  #     FROM students
+  #     WHERE name = ?
+  #     LIMIT 1
+  #   SQL
+  #
+  #   DB[:conn].execute(sql, name).map do |row|
+  #     self.new_from_db(row)
+  #   end.first
+  #   # The return value of the .map method is an array,
+  #   # and we're simply grabbing the .first element from the returned array.
+  # end
+  #
+  # def update
+  #   sql = "UPDATE students SET name = ?, grade = ? WHERE name = ?"
+  #   DB[:conn].execute(sql, self.name, self.grade, self.id)
+  # end
 
 end

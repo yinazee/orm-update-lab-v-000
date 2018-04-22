@@ -52,14 +52,14 @@ class Student
       WHERE name = ?
       LIMIT 1
     SQL
-  
+
     DB[:conn].execute(sql, name).map do |row|
       self.new_from_db(row)
     end.first
     # The return value of the .map method is an array,
     # and we're simply grabbing the .first element from the returned array.
   end
-  
+
   def update
     sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
     DB[:conn].execute(sql, self.name, self.grade, self.id)

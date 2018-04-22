@@ -56,7 +56,7 @@ class Student
       self.new_from_db(row)
     end
     # The return value of the .map method is an array,
-    # and we're simply grabbing the .first element from the returned array. 
+    # and we're simply grabbing the .first element from the returned array.
   end
 
   def update
